@@ -8,13 +8,24 @@ const pxH = document.getElementById("pxH");
 const formatSel = document.getElementById("format");
 const downloadBtn = document.getElementById("download");
 
+/* pixel toggle */
 pixelToggle.onchange = () => {
   pxW.disabled = pxH.disabled = !pixelToggle.checked;
 };
 
+/* upload with 10MB LIMIT */
 upload.onchange = () => {
   file = upload.files[0];
   if (!file) return;
+
+  const maxSize = 10 * 1024 * 1024; // 10 MB
+
+  if (file.size > maxSize) {
+    alert("Image size must be 10MB or less");
+    upload.value = "";
+    file = null;
+    return;
+  }
 
   document.getElementById("fileInfo").innerText =
     `${file.name} (${Math.round(file.size / 1024)} KB)`;
@@ -27,6 +38,7 @@ upload.onchange = () => {
   };
 };
 
+/* size select */
 document.querySelectorAll(".size-btn").forEach(btn => {
   btn.onclick = () => {
     document.querySelectorAll(".size-btn")
@@ -43,11 +55,8 @@ document.querySelectorAll(".size-btn").forEach(btn => {
   };
 });
 
-/* ===========================
-   HARD GUARANTEE COMPRESSION
-   target se zyada kabhi nahi
-   quality kam ho sakti hai
-   =========================== */
+/* HARD GUARANTEE compression
+   target se zyada kabhi nahi */
 async function compressSafe(sourceCanvas, targetKB) {
   let quality = 0.9;
   let scale = 1;
@@ -58,7 +67,6 @@ async function compressSafe(sourceCanvas, targetKB) {
   while (true) {
     tmp.width = Math.max(1, Math.floor(sourceCanvas.width * scale));
     tmp.height = Math.max(1, Math.floor(sourceCanvas.height * scale));
-
     ctx.drawImage(sourceCanvas, 0, 0, tmp.width, tmp.height);
 
     const blob = await new Promise(r =>
@@ -67,12 +75,12 @@ async function compressSafe(sourceCanvas, targetKB) {
 
     const sizeKB = blob.size / 1024;
 
-    /* SUCCESS: target se niche */
+    /* SUCCESS: target se kam */
     if (sizeKB <= targetKB) {
       return blob;
     }
 
-    /* TOO BIG: force reduce */
+    /* force reduce */
     if (quality > 0.2) {
       quality -= 0.08;
     } else {
@@ -86,6 +94,7 @@ async function compressSafe(sourceCanvas, targetKB) {
   }
 }
 
+/* process */
 document.getElementById("processBtn").onclick = async () => {
   if (!file) {
     alert("Upload image");
