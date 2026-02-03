@@ -37,7 +37,7 @@ document.getElementById("convertBtn").onclick = async () => {
 
   const download = document.getElementById("download");
   download.href = url;
-  download.download = "imagetoolify-converted." + ext;
+  download.download = "(imagetoolify.in) converted." + ext;
 
   document.getElementById("processing").style.display = "none";
   document.getElementById("previewBox").style.display = "block";
