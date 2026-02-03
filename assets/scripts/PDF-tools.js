@@ -46,7 +46,7 @@ document.getElementById("makePdf").onclick=async()=>{
   }
 
   /* ✅ filename changed */
-  pdf.save("imagetoolify-images.pdf");
+  pdf.save("(imagetoolify.in).pdf");
   processing.style.display="none";
 };
 
@@ -91,7 +91,7 @@ document.getElementById("makeImages").onclick=async()=>{
     const a=document.createElement("a");
     a.href=url;
     /* ✅ filename changed */
-    a.download="imagetoolify-page-"+i+".jpg";
+    a.download="(imagetoolify.in)-"+i+".jpg";
     a.className="btn";
     a.innerText="Download Image";
 
