@@ -34,7 +34,7 @@ body{
   color:var(--text);
 }
 
-/* NAVBAR */
+/* ================= NAVBAR ================= */
 .navbar{
   position:sticky;
   top:0;
@@ -71,40 +71,69 @@ body{
   height:3px;
   width:100%;
   background:#fff;
+  transition:.3s;
 }
 
 .menu-btn span:nth-child(1){top:0}
 .menu-btn span:nth-child(2){top:9px}
 .menu-btn span:nth-child(3){top:18px}
 
-.menu-btn.active span:nth-child(1){transform:rotate(45deg);top:9px}
-.menu-btn.active span:nth-child(2){opacity:0}
-.menu-btn.active span:nth-child(3){transform:rotate(-45deg);top:9px}
+.menu-btn.active span:nth-child(1){
+  transform:rotate(45deg);
+  top:9px;
+}
+.menu-btn.active span:nth-child(2){
+  opacity:0;
+}
+.menu-btn.active span:nth-child(3){
+  transform:rotate(-45deg);
+  top:9px;
+}
 
+/* ===== NAV MENU (CHANGE START) ===== */
 .nav-menu{
-  display:none;
+  max-height:0;                 /* ✅ CHANGE: display:none removed */
+  overflow:hidden;              /* ✅ CHANGE */
+  display:flex;
   flex-direction:column;
   background:rgba(0,0,0,0.9);
+  transition:max-height .35s ease; /* ✅ CHANGE: smooth animation */
+}
+
+/* ✅ CHANGE: open state for animation */
+.nav-menu.open{
+  max-height:400px;
 }
 
 .nav-menu a{
   color:#fff;
   padding:14px 20px;
   text-decoration:none;
+  border-bottom:1px solid rgba(255,255,255,0.1);
 }
 
+.nav-menu a:hover{
+  background:rgba(255,255,255,0.1);
+}
+
+/* ===== DESKTOP FIX ===== */
 @media(min-width:768px){
   .menu-btn{display:none}
+
   .nav-menu{
-    display:flex!important;
+    max-height:none;          /* ✅ CHANGE */
     flex-direction:row;
     justify-content:center;
     background:none;
   }
-  .nav-menu a{padding:0 14px}
+
+  .nav-menu a{
+    border:none;
+    padding:0 14px;
+  }
 }
 
-/* PAGE */
+/* ================= PAGE ================= */
 .page{
   flex:1;
   display:flex;
@@ -121,8 +150,17 @@ body{
   border-radius:14px;
 }
 
-h1{text-align:center;margin-bottom:8px}
-.sub{text-align:center;font-size:14px;opacity:.8;margin-bottom:22px}
+h1{
+  text-align:center;
+  margin-bottom:8px;
+}
+
+.sub{
+  text-align:center;
+  font-size:14px;
+  opacity:.8;
+  margin-bottom:22px;
+}
 
 input,textarea{
   width:100%;
@@ -134,7 +172,9 @@ input,textarea{
   color:var(--text);
 }
 
-textarea{min-height:120px}
+textarea{
+  min-height:120px;
+}
 
 button{
   width:100%;
@@ -153,7 +193,7 @@ button{
   margin-top:12px;
 }
 
-/* FOOTER */
+/* ================= FOOTER ================= */
 footer{
   background:var(--footer-bg);
   color:var(--footer-text);
