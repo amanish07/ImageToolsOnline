@@ -5,27 +5,12 @@
   <title>Contact Us – imagetoolify</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- BASIC SEO -->
   <meta name="description" content="Contact imagetoolify for support, feedback or queries related to image and PDF tools.">
 
-  <!-- FAVICON -->
   <link rel="icon" href="/assets/images/ImageToolifyLogo.png" type="image/png">
-
-  <!-- OPEN GRAPH -->
-  <meta property="og:title" content="Contact Us – imagetoolify">
-  <meta property="og:description" content="Get in touch with imagetoolify for questions or support.">
-  <meta property="og:image" content="https://imagetoolify.in/assets/images/ImageToolifyBanner.png">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://imagetoolify.in/contact.html">
-
-  <!-- TWITTER -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://imagetoolify.in/assets/images/ImageToolifyBanner.png">
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="/assets/styles/contact.css">
-
   <link rel="canonical" href="https://imagetoolify.in/contact/">
+
+  <link rel="stylesheet" href="/assets/styles/contact.css">
 </head>
 
 <body>
@@ -34,7 +19,6 @@
 <header class="navbar">
   <div class="nav-container">
     <a href="/" class="logo">imagetoolify</a>
-
     <div class="menu-btn" id="menuBtn">
       <span></span><span></span><span></span>
     </div>
@@ -56,16 +40,18 @@
     <h1>Contact Us</h1>
     <p class="sub">Get in touch with imagetoolify</p>
 
-    <form action="mailto:amanraj05100@gmail.com" method="post" enctype="text/plain">
-      <input type="text" name="Name" placeholder="Your Name" required>
-      <input type="email" name="Email" placeholder="Your Email" required>
-      <textarea name="Message" placeholder="Your Message" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
+    <!-- ✅ WORKING FORM -->
+    <form id="contactForm">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" placeholder="Your Message" required></textarea>
 
-    <p class="note">
-      Note: Submitting this form will open your default email app.
-    </p>
+      <!-- honeypot -->
+      <input type="text" name="_gotcha" style="display:none">
+
+      <button type="submit">Send Message</button>
+      <p id="formStatus" class="note"></p>
+    </form>
   </div>
 </div>
 
@@ -85,3 +71,4 @@
 <script src="/assets/scripts/contact.js"></script>
 </body>
 </html>
+
