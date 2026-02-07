@@ -1,11 +1,12 @@
+// NAVIGATION TOGGLE
 const menuBtn = document.getElementById("menuBtn");
 const navMenu = document.getElementById("navMenu");
 
 menuBtn.onclick = () => {
-  menuBtn.classList.toggle("active");
-  navMenu.classList.toggle("open");
+  navMenu.style.display = navMenu.style.display === "block" ? "none" : "block";
 };
 
+// CONTACT FORM
 const form = document.getElementById("contactForm");
 const status = document.getElementById("formStatus");
 
@@ -13,7 +14,6 @@ form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   status.textContent = "Sending message...";
-  status.style.color = "";
 
   const data = new FormData(form);
 
@@ -26,25 +26,20 @@ form.addEventListener("submit", async (e) => {
       }
     });
 
-    const result = await res.json(); // 🔴 THIS WAS MISSING
+    const result = await res.json();
 
     if (res.ok) {
       form.reset();
       status.textContent = "Thank you for contacting us. We will reply you soon.";
-      status.style.color = "green";
 
       setTimeout(() => {
         status.textContent = "";
       }, 5000);
-
     } else {
-      // 🔥 REAL ERROR MESSAGE FROM FORMSPREE
-      status.textContent = result.error || "Submission failed. Please check form fields.";
-      status.style.color = "red";
+      status.textContent = result.error || "Form submission failed. Please check inputs.";
     }
 
   } catch (error) {
     status.textContent = "Network error. Please try again later.";
-    status.style.color = "red";
   }
 });
