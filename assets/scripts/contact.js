@@ -1,18 +1,16 @@
-// NAVIGATION TOGGLE
 const menuBtn = document.getElementById("menuBtn");
 const navMenu = document.getElementById("navMenu");
 
 menuBtn.onclick = () => {
-  navMenu.style.display = navMenu.style.display === "block" ? "none" : "block";
+  menuBtn.classList.toggle("active");
+  navMenu.classList.toggle("open");
 };
 
-// CONTACT FORM
 const form = document.getElementById("contactForm");
 const status = document.getElementById("formStatus");
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
-
   status.textContent = "Sending message...";
 
   const data = new FormData(form);
@@ -21,12 +19,8 @@ form.addEventListener("submit", async (e) => {
     const res = await fetch("https://formspree.io/f/mqedkzoe", {
       method: "POST",
       body: data,
-      headers: {
-        "Accept": "application/json"
-      }
+      headers: { "Accept": "application/json" }
     });
-
-    const result = await res.json();
 
     if (res.ok) {
       form.reset();
@@ -36,10 +30,9 @@ form.addEventListener("submit", async (e) => {
         status.textContent = "";
       }, 5000);
     } else {
-      status.textContent = result.error || "Form submission failed. Please check inputs.";
+      status.textContent = "Something went wrong. Please try again.";
     }
-
-  } catch (error) {
-    status.textContent = "Network error. Please try again later.";
+  } catch {
+    status.textContent = "Network error. Please try later.";
   }
 });
